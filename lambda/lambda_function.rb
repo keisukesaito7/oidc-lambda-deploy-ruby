@@ -1,3 +1,5 @@
+require 'slack-notifier'
+
 def lambda_handler(*)
   message = random_message
   post_message(message)
@@ -8,7 +10,8 @@ def random_message
 end
 
 def post_message(message)
-  p message
+  notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+  notifier.ping message
 end
 
 lambda_handler
