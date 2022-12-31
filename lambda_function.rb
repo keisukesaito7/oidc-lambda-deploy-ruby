@@ -1,7 +1,7 @@
 require 'slack-notifier'
 
 def lambda_handler(*)
-  message = 'Hi, Jun ! You are No.1 !!'
+  message = 'Hi, Jun !! You are No.1 !!'
   post_message(message)
 end
 

@@ -36,4 +36,4 @@ jobs:
 
     - name: Update Lambda
       run: |
-        aws lambda update-function-code --function-name oidc-lambda-deploy-ruby --zip-file fileb://package.zip --publish
+        aws lambda update-function-code --function-name oidc-lambda-deploy-ruby --zip-file fileb://package.zip
