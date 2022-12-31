@@ -1,4 +1,5 @@
 require 'slack-notifier'
+require 'faker'
 
 def lambda_handler(*)
   message = random_message
@@ -6,7 +7,8 @@ def lambda_handler(*)
 end
 
 def random_message
-  'hoge'
+  name = Faker::Name.name
+  "Hi, #{name} ! You are No.1 !!"
 end
 
 def post_message(message)
