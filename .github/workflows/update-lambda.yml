@@ -1,0 +1,35 @@
+name: Update Lambda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git Clone the Repository
+      uses: actions/checkout@v3
+
+    - name: Set Up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7.6'
+        bundler-cache: true
+    
+    - name: Compress Zip
+      run: |
+        zip -r package.zip lambda/lambda-handler.rb vendor
+    
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.ROLE_NAME }}
+        role-session-name: OidcLambdaUpdateRuby
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Update Lambda
+      run: |
+        aws lambda update-function-code --function-name oidc-lambda-deploy-ruby --zip-file fileb://package.zip --publish
