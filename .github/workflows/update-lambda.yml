@@ -25,7 +25,7 @@ jobs:
     
     - name: Compress Zip
       run: |
-        zip -r package.zip lambda vendor
+        zip -r package.zip lambda_function.rb vendor
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
