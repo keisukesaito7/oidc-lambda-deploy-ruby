@@ -15,5 +15,3 @@ def post_message(message)
   notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
   notifier.ping message
 end
-
-lambda_handler
